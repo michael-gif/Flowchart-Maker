@@ -19,6 +19,11 @@ namespace FlowchartMaker
             diagramControl1.ContextMenuStrip = contextMenuStrip1;
 
             diagram = diagramControl1.Diagram;
+            diagram.TextEdited += (s, e) =>
+            {
+                TextBlock block = (e.Subject) as TextBlock;
+                ((NodeData)block.Part.Data).Text = block.Text;
+            };
             Setup();
         }
 
@@ -92,6 +97,7 @@ namespace FlowchartMaker
                 .Add(
                     new TextBlock
                     {
+                        Editable = true,
                         Alignment = Spot.Center,
                         Margin = new Margin(10, 10)
                     }.Bind("Text", "Text"),
@@ -117,7 +123,7 @@ namespace FlowchartMaker
             }
             .Add(
                 new Shape { Fill = "white", Stroke = "black", StrokeWidth = 2 },
-                new TextBlock { Alignment = Spot.Center, Margin = new Margin(10, 10) }
+                new TextBlock { Editable = true, Alignment = Spot.Center, Margin = new Margin(10, 10) }
                 .Bind("Text", "Text"),
                 new Shape
                 {
@@ -177,6 +183,7 @@ namespace FlowchartMaker
                 .Add(
                     new TextBlock
                     {
+                        Editable = true,
                         Alignment = Spot.Center,
                         Margin = new Margin(10, 10)
                     }.Bind("Text", "Text"),
@@ -235,6 +242,7 @@ namespace FlowchartMaker
                     new Shape("Diamond") { Fill = "white", Stroke = "black", StrokeWidth = 2 },
                     new TextBlock
                     {
+                        Editable = true,
                         Alignment = Spot.Center,
                         Margin = new Margin(10, 10)
                     }.Bind("Text", "Text"),
@@ -366,6 +374,7 @@ namespace FlowchartMaker
                 if (node.Data is NodeData data)
                 {
                     data.Position = node.Position;
+                    Console.WriteLine(data.Text);
                 }
             }
             string savedFlowchart = diagram.Model.ToJson();
