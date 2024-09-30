@@ -7,11 +7,24 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>resources\icon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="resources\icon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Northwoods.GoDiagram.WinForms" Version="10.0.10" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="images\" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if $(ConfigurationName) == Release (&#xD;&#xA;del bin\Release\net6.0-windows\FlowchartMaker.pdb&#xD;&#xA;del bin\Release\net6.0-windows\Northwoods.GoDiagram.WinForms.ForceDirectedLayout.dll&#xD;&#xA;del bin\Release\net6.0-windows\Northwoods.GoDiagram.WinForms.LayeredDigraphLayout.dll&#xD;&#xA;del bin\Release\net6.0-windows\Northwoods.GoDiagram.WinForms.TreeLayout.dll&#xD;&#xA;del bin\Release\net6.0-windows\OpenTK.GLControl.dll&#xD;&#xA;del bin\Release\net6.0-windows\SkiaSharp.Extended.Svg.dll&#xD;&#xA;resources\winrar a -ep1 -r &quot;bin\Release\net6.0-windows\FlowchartMaker.zip&quot; &quot;bin\Release\net6.0-windows\&quot;&#xD;&#xA;)" />
+  </Target>
 
 </Project>

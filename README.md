@@ -2,11 +2,11 @@
 Simple gui based flowchart maker
 
 # Screenshot
-![screenshot](https://github.com/michael-gif/Flowchart-Maker/blob/main/images/screenshot.png)
+![screenshot](https://github.com/michael-gif/Flowchart-Maker/blob/main/resources/screenshot.png)
 
 # Usage
 ## Add node (right click menu)
-![context menu](https://github.com/michael-gif/Flowchart-Maker/blob/main/images/context_menu.png)
+![context menu](https://github.com/michael-gif/Flowchart-Maker/blob/main/resources/context_menu.png)
 
 ## Delete a node
 - Press Delete on your keyboard
@@ -16,6 +16,6 @@ Simple gui based flowchart maker
 
 ## Linking nodes
 - Drag and drop between a black node connector and another node
-![create link](https://github.com/michael-gif/Flowchart-Maker/blob/main/images/create_link.png)
+![create link](https://github.com/michael-gif/Flowchart-Maker/blob/main/resources/create_link.png)
 - You can also click on node links and change them using the handles
-![change link](https://github.com/michael-gif/Flowchart-Maker/blob/main/images/change_link.png)
+![change link](https://github.com/michael-gif/Flowchart-Maker/blob/main/resources/change_link.png)
