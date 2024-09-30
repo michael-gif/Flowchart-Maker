@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Northwoods.GoDiagram.WinForms" Version="10.0.10" />
   </ItemGroup>
 

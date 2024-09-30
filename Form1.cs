@@ -1,7 +1,5 @@
 using Northwoods.Go.Models;
 using Northwoods.Go;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Northwoods.Go.Tools;
 
 namespace FlowchartMaker
@@ -86,6 +84,7 @@ namespace FlowchartMaker
                 MinSize = new Northwoods.Go.Size(50, 30),
                 FromSpot = Spot.Bottom,
             }
+            .Bind(new Northwoods.Go.Models.Binding("Position", "Position").MakeTwoWay())
             .Add(
                 new Shape { Fill = "white", Stroke = "black", StrokeWidth = 2 },
                 new Northwoods.Go.Panel("Spot")
@@ -116,6 +115,7 @@ namespace FlowchartMaker
                 MinSize = new Northwoods.Go.Size(50, 30),
                 ToSpot = Spot.AllSides
             }
+            .Bind(new Northwoods.Go.Models.Binding("Position", "Position").MakeTwoWay())
             .Add(
                 new Shape { Fill = "white", Stroke = "black", StrokeWidth = 2 },
                 new TextBlock { Editable = true, Alignment = Spot.Center, Margin = new Margin(10, 10) }
@@ -172,6 +172,7 @@ namespace FlowchartMaker
                 FromSpot = Spot.BottomSide,
                 ToSpot = Spot.NotBottomSide
             }
+            .Bind(new Northwoods.Go.Models.Binding("Position", "Position").MakeTwoWay())
             .Add(
                 new Shape { Fill = "white", Stroke = "black", StrokeWidth = 2 },
                 new Northwoods.Go.Panel("Spot")
@@ -231,6 +232,7 @@ namespace FlowchartMaker
             {
                 ToSpot = Spot.TopLeftSides,
             }
+            .Bind(new Northwoods.Go.Models.Binding("Position", "Position").MakeTwoWay())
             .Add(
                 new Northwoods.Go.Panel("Spot")
                 .Add(
@@ -307,47 +309,7 @@ namespace FlowchartMaker
             {
                 using StreamReader reader = new(openFileDialog.FileName);
                 string flowchart = reader.ReadToEnd();
-
-                //for some reason i can't get the positions to load using MyModel.FromJson, so i am parsing the json file manually to get them.
-                JObject root = JsonConvert.DeserializeObject<JObject>(flowchart);
-
-                // node data
-                JToken[] nodeDataSource = root.GetValue("NodeDataSource").ToArray();
-                var nodeDataList = new List<NodeData>();
-                foreach (JToken token in nodeDataSource)
-                {
-                    string key = token.Value<string>("key");
-                    string category = token.Value<string>("category");
-                    string text = token.Value<string>("text");
-                    string[] xy = token.Value<string>("position").Split(" ");
-                    Northwoods.Go.Point location = new Northwoods.Go.Point(double.Parse(xy[0]), double.Parse(xy[1]));
-                    nodeDataList.Add(new NodeData { Key = key, Category = category, Text = text, Position = location });
-                }
-
-                // link data
-                JToken[] linkDataSource = root.GetValue("LinkDataSource").ToArray();
-                var linkDataList = new List<LinkData>();
-                foreach (JToken token in linkDataSource)
-                {
-                    string from = token.Value<string>("from");
-                    string to = token.Value<string>("to");
-                    string fromPort = token.Value<string>("fromPort");
-                    string toPort = token.Value<string>("toPort");
-                    linkDataList.Add(new LinkData { From = from, To = to, FromPort = fromPort, ToPort = toPort });
-                }
-
-                // create new model
-                diagram.Model = new MyModel
-                {
-                    LinkFromPortIdProperty = "FromPort",
-                    LinkToPortIdProperty = "ToPort",
-                    NodeDataSource = nodeDataList,
-                    LinkDataSource = linkDataList
-                };
-
-                // update node positions
-                foreach (var node in diagram.Nodes) node.Position = ((NodeData)node.Data).Position;
-
+                diagram.Model = MyModel.FromJson<MyModel>(flowchart);
             }
             catch (IOException ex)
             {
@@ -363,14 +325,6 @@ namespace FlowchartMaker
             saveFileDialog1.Title = "Save flowchart";
             saveFileDialog1.ShowDialog();
             if (saveFileDialog1.FileName == "") return;
-
-            foreach (var node in diagram.Nodes)
-            {
-                if (node.Data is NodeData data)
-                {
-                    data.Position = node.Position;
-                }
-            }
             string savedFlowchart = diagram.Model.ToJson();
             File.WriteAllText(saveFileDialog1.FileName, savedFlowchart);
             MessageBox.Show("Saved flowchart to " + saveFileDialog1.FileName, "Saved flowchart", MessageBoxButtons.OK, MessageBoxIcon.Information);
