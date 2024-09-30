@@ -374,7 +374,6 @@ namespace FlowchartMaker
                 if (node.Data is NodeData data)
                 {
                     data.Position = node.Position;
-                    Console.WriteLine(data.Text);
                 }
             }
             string savedFlowchart = diagram.Model.ToJson();
