@@ -355,6 +355,12 @@ namespace FlowchartMaker
 
         private void saveFlowchartToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Json file|*.json";
+            saveFileDialog1.Title = "Save flowchart";
+            saveFileDialog1.ShowDialog();
+            if (saveFileDialog1.FileName == "") return;
+
             foreach (var node in diagram.Nodes)
             {
                 if (node.Data is NodeData data)
@@ -363,8 +369,8 @@ namespace FlowchartMaker
                 }
             }
             string savedFlowchart = diagram.Model.ToJson();
-            File.WriteAllText("flowchart.json", savedFlowchart);
-            MessageBox.Show("Saved flowchart to flowchart.json", "Saved flowchart", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            File.WriteAllText(saveFileDialog1.FileName, savedFlowchart);
+            MessageBox.Show("Saved flowchart to " + saveFileDialog1.FileName, "Saved flowchart", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void clearFlowchartToolStripMenuItem_Click(object sender, EventArgs e)
