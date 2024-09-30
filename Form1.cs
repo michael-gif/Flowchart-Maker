@@ -19,11 +19,6 @@ namespace FlowchartMaker
             diagramControl1.ContextMenuStrip = contextMenuStrip1;
 
             diagram = diagramControl1.Diagram;
-            diagram.TextEdited += (s, e) =>
-            {
-                TextBlock block = (e.Subject) as TextBlock;
-                ((NodeData)block.Part.Data).Text = block.Text;
-            };
             Setup();
         }
 
@@ -100,7 +95,7 @@ namespace FlowchartMaker
                         Editable = true,
                         Alignment = Spot.Center,
                         Margin = new Margin(10, 10)
-                    }.Bind("Text", "Text"),
+                    }.Bind(new Northwoods.Go.Models.Binding("Text", "Text").MakeTwoWay()),
                     new Shape
                     {
                         Width = 6,
@@ -124,7 +119,7 @@ namespace FlowchartMaker
             .Add(
                 new Shape { Fill = "white", Stroke = "black", StrokeWidth = 2 },
                 new TextBlock { Editable = true, Alignment = Spot.Center, Margin = new Margin(10, 10) }
-                .Bind("Text", "Text"),
+                .Bind(new Northwoods.Go.Models.Binding("Text", "Text").MakeTwoWay()),
                 new Shape
                 {
                     Fill = null,
@@ -186,7 +181,7 @@ namespace FlowchartMaker
                         Editable = true,
                         Alignment = Spot.Center,
                         Margin = new Margin(10, 10)
-                    }.Bind("Text", "Text"),
+                    }.Bind(new Northwoods.Go.Models.Binding("Text", "Text").MakeTwoWay()),
                     new Shape
                     {
                         Fill = null,
@@ -245,7 +240,7 @@ namespace FlowchartMaker
                         Editable = true,
                         Alignment = Spot.Center,
                         Margin = new Margin(10, 10)
-                    }.Bind("Text", "Text"),
+                    }.Bind(new Northwoods.Go.Models.Binding("Text", "Text").MakeTwoWay()),
                     new Shape
                     {
                         Fill = null,
