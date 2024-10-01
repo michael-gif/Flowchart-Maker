@@ -381,7 +381,11 @@ namespace FlowchartMaker
 
         private void clearFlowchartToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            diagram.Model = new MyModel();
+            diagram.Model = new MyModel()
+            {
+                LinkFromPortIdProperty = "FromPort",  // required information:
+                LinkToPortIdProperty = "ToPort",      // identifies data property names
+            };
         }
 
         private void enableGridlinesToolStripMenuItem_Click(object sender, EventArgs e)
