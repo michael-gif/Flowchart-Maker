@@ -20,10 +20,12 @@ namespace FlowchartMaker
 
         public static void Reveal(Diagram diagram, string nodeType)
         {
+            INSTANCE.Text = "Add " + nodeType + " node";
             INSTANCE.diagram = diagram;
             INSTANCE.nodeType = nodeType;
             INSTANCE.textBox1.Text = "";
             INSTANCE.Show();
+            INSTANCE.Location = Cursor.Position;
             INSTANCE.textBox1.Focus();
         }
 

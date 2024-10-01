@@ -296,7 +296,7 @@ namespace FlowchartMaker
         public class MyModel : GraphLinksModel<NodeData, string, object, LinkData, string, string> { }
         public class NodeData
         {
-            // redefined some methods because the suggested way of doing this adds a bunch of junk data to the saved json file
+            // redefined some properties because the suggested way of doing this adds a bunch of junk data to the saved json file
             public string Key { get; set; }
             public string Category { get; set; } = "";
             public string Text { get; set; }
@@ -306,7 +306,7 @@ namespace FlowchartMaker
         }
         public class LinkData
         {
-            // redefined some methods because the suggested way of doing this adds a bunch of junk data to the saved json file
+            // redefined some properties because the suggested way of doing this adds a bunch of junk data to the saved json file
             public string Key { get; set; }
             public string From { get; set; }
             public string To { get; set; }

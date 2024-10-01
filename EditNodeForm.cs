@@ -25,6 +25,7 @@ namespace FlowchartMaker
             INSTANCE.diagram = diagram;
             INSTANCE.NodeKey = nodeKey;
             INSTANCE.Show();
+            INSTANCE.Location = Cursor.Position;
             Form1.NodeData data = (Form1.NodeData)diagram.FindNodeForKey(nodeKey).Data;
             INSTANCE.editNodeNewText.Text = data.Text;
             INSTANCE.editNodeNewText.SelectionStart = 0;
