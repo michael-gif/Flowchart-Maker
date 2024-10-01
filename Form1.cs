@@ -17,6 +17,12 @@ namespace FlowchartMaker
             diagramControl1.ContextMenuStrip = contextMenuStrip1;
 
             diagram = diagramControl1.Diagram;
+            diagram.ElementDoubleClicked += (s, e) =>
+            {
+                var part = (e.Subject as GraphObject).Part;
+                if (part is Link) return;
+                EditNodeForm.Reveal(diagram, (string)part.Key);
+            };
             Setup();
         }
 
@@ -86,15 +92,17 @@ namespace FlowchartMaker
             }
             .Bind(new Northwoods.Go.Models.Binding("Position", "Position").MakeTwoWay())
             .Add(
-                new Shape { Fill = "white", Stroke = "black", StrokeWidth = 2 },
+                new Shape { Fill = "white", Stroke = "black", StrokeWidth = 2 }
+                .Bind("Fill", "BackColor"),
                 new Northwoods.Go.Panel("Spot")
                 .Add(
                     new TextBlock
                     {
-                        Editable = true,
                         Alignment = Spot.Center,
                         Margin = new Margin(10, 10)
-                    }.Bind(new Northwoods.Go.Models.Binding("Text", "Text").MakeTwoWay()),
+                    }
+                    .Bind("Text", "Text")
+                    .Bind("Stroke", "ForeColor"),
                     new Shape
                     {
                         Width = 6,
@@ -117,9 +125,15 @@ namespace FlowchartMaker
             }
             .Bind(new Northwoods.Go.Models.Binding("Position", "Position").MakeTwoWay())
             .Add(
-                new Shape { Fill = "white", Stroke = "black", StrokeWidth = 2 },
-                new TextBlock { Editable = true, Alignment = Spot.Center, Margin = new Margin(10, 10) }
-                .Bind(new Northwoods.Go.Models.Binding("Text", "Text").MakeTwoWay()),
+                new Shape { Fill = "white", Stroke = "black", StrokeWidth = 2 }
+                .Bind("Fill", "BackColor"),
+                new TextBlock
+                {
+                    Alignment = Spot.Center,
+                    Margin = new Margin(10, 10)
+                }
+                .Bind("Text", "Text")
+                .Bind("Stroke", "ForeColor"),
                 new Shape
                 {
                     Fill = null,
@@ -174,15 +188,16 @@ namespace FlowchartMaker
             }
             .Bind(new Northwoods.Go.Models.Binding("Position", "Position").MakeTwoWay())
             .Add(
-                new Shape { Fill = "white", Stroke = "black", StrokeWidth = 2 },
+                new Shape { Fill = "white", Stroke = "black", StrokeWidth = 2 }
+                .Bind("Fill", "BackColor"),
                 new Northwoods.Go.Panel("Spot")
                 .Add(
                     new TextBlock
                     {
-                        Editable = true,
                         Alignment = Spot.Center,
                         Margin = new Margin(10, 10)
-                    }.Bind(new Northwoods.Go.Models.Binding("Text", "Text").MakeTwoWay()),
+                    }.Bind("Text", "Text")
+                    .Bind("Stroke", "ForeColor"),
                     new Shape
                     {
                         Fill = null,
@@ -236,13 +251,15 @@ namespace FlowchartMaker
             .Add(
                 new Northwoods.Go.Panel("Spot")
                 .Add(
-                    new Shape("Diamond") { Fill = "white", Stroke = "black", StrokeWidth = 2 },
+                    new Shape("Diamond") { Fill = "white", Stroke = "black", StrokeWidth = 2 }
+                    .Bind("Fill", "BackColor"),
                     new TextBlock
                     {
-                        Editable = true,
                         Alignment = Spot.Center,
                         Margin = new Margin(10, 10)
-                    }.Bind(new Northwoods.Go.Models.Binding("Text", "Text").MakeTwoWay()),
+                    }
+                    .Bind("Text", "Text")
+                    .Bind("Stroke", "ForeColor"),
                     new Shape
                     {
                         Fill = null,
@@ -284,6 +301,8 @@ namespace FlowchartMaker
             public string Category { get; set; } = "";
             public string Text { get; set; }
             public Northwoods.Go.Point Position { get; set; }
+            public string ForeColor { get; set; } = "black";
+            public string BackColor { get; set; } = "white";
         }
         public class LinkData
         {
@@ -370,16 +389,12 @@ namespace FlowchartMaker
 
         private void processToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddNodeForm.nodeType = "process";
-            AddNodeForm addNodeForm = new AddNodeForm();
-            addNodeForm.Show();
+            AddNodeForm.Reveal(diagram, "process");
         }
 
         private void decisionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddNodeForm.nodeType = "decision";
-            AddNodeForm addNodeForm = new AddNodeForm();
-            addNodeForm.Show();
+            AddNodeForm.Reveal(diagram, "decision");
         }
     }
 }

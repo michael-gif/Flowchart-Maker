@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddNodeForm));
             textBox1 = new TextBox();
             button1 = new Button();
             label1 = new Label();
@@ -63,12 +64,18 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(187, 86);
             Controls.Add(label1);
             Controls.Add(button1);
             Controls.Add(textBox1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "AddNodeForm";
             Text = "Add Node";
+            FormClosing += AddNodeForm_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }

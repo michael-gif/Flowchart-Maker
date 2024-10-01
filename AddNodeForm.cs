@@ -14,8 +14,20 @@ namespace FlowchartMaker
 {
     public partial class AddNodeForm : Form
     {
-        public static string nodeType = "";
-        public AddNodeForm()
+        public static AddNodeForm INSTANCE = new AddNodeForm();
+        public string nodeType = "";
+        public Diagram diagram;
+
+        public static void Reveal(Diagram diagram, string nodeType)
+        {
+            INSTANCE.diagram = diagram;
+            INSTANCE.nodeType = nodeType;
+            INSTANCE.textBox1.Text = "";
+            INSTANCE.Show();
+            INSTANCE.textBox1.Focus();
+        }
+
+        private AddNodeForm()
         {
             InitializeComponent();
             textBox1.KeyPress += new KeyPressEventHandler(CheckEnterKeyPress);
@@ -24,21 +36,20 @@ namespace FlowchartMaker
         private void button1_Click(object sender, EventArgs e)
         {
             AddNodeToModel();
-            Close();
+            Hide();
         }
 
-        private void CheckEnterKeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        private void CheckEnterKeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return)
             {
                 AddNodeToModel();
-                Close();
+                Hide();
             }
         }
 
         private void AddNodeToModel()
         {
-            Form1 form1 = (Form1)Application.OpenForms["Form1"];
             Form1.NodeData nodedata = null;
             switch (nodeType)
             {
@@ -49,8 +60,17 @@ namespace FlowchartMaker
                     nodedata = new Form1.NodeData { Key = textBox1.Text, Category = "Decision", Text = textBox1.Text };
                     break;
             }
-            form1.diagram.Model.AddNodeData(nodedata);
-            form1.diagram.UpdateAllRelationshipsFromData();
+            diagram.Model.AddNodeData(nodedata);
+            diagram.UpdateAllRelationshipsFromData();
+        }
+
+        private void AddNodeForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+            }
         }
     }
 }
