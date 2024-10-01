@@ -22,16 +22,7 @@ namespace FlowchartMaker
             this.nodeKey = nodeKey;
             this.parentTextBox = parentTextBox;
             InitializeComponent();
-            expandTextOkButton.KeyPress += new KeyPressEventHandler(CheckEnterKeyPress);
             expandedTextBox.Text = parentTextBox.Text;
-        }
-
-        private void CheckEnterKeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Return)
-            {
-                SaveNodeText();
-            }
         }
 
         private void SaveNodeText()

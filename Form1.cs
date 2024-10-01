@@ -1,6 +1,7 @@
 using Northwoods.Go.Models;
 using Northwoods.Go;
 using Northwoods.Go.Tools;
+using System.Windows.Forms;
 
 namespace FlowchartMaker
 {
@@ -11,6 +12,9 @@ namespace FlowchartMaker
         public Form1()
         {
             InitializeComponent();
+
+            KeyPreview = true;
+            KeyDown += new KeyEventHandler(Form_KeyDown);
 
             contextMenuStrip1.Items.Insert(0, new ToolStripLabel("Add node") { Font = new System.Drawing.Font(DefaultFont, System.Drawing.FontStyle.Bold) });
             contextMenuStrip1.Items.Insert(1, new ToolStripSeparator());
@@ -24,6 +28,22 @@ namespace FlowchartMaker
                 EditNodeForm.Reveal(diagram, (string)part.Key);
             };
             Setup();
+        }
+
+        void Form_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Ctrl-S Save
+            if (e.Control && e.KeyCode == Keys.S)
+            {
+                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+                SaveFlowchart();
+            }
+            // Ctrl-O open
+            if (e.Control && e.KeyCode == Keys.O)
+            {
+                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+                OpenFlowchart();
+            }
         }
 
         private void Setup()
@@ -318,6 +338,11 @@ namespace FlowchartMaker
 
         private void openFlowchartToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OpenFlowchart();
+        }
+
+        private void OpenFlowchart()
+        {
             OpenFileDialog openFileDialog = new OpenFileDialog()
             {
                 Filter = "Json files (*.json)|*.json",
@@ -338,6 +363,11 @@ namespace FlowchartMaker
         }
 
         private void saveFlowchartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFlowchart();
+        }
+
+        private void SaveFlowchart()
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "Json file|*.json";

@@ -19,7 +19,11 @@ Simple gui based flowchart maker
 ![edit node window](https://github.com/michael-gif/Flowchart-Maker/blob/main/resources/expanded_text_window.png)
 
 ## Linking nodes
-- Drag and drop between a black node connector and another node
+- Drag and drop between a black node connector and another node  
 ![create link](https://github.com/michael-gif/Flowchart-Maker/blob/main/resources/create_link.png)
-- You can also click on node links and change them using the handles
+- You can also click on node links and change them using the handles  
 ![change link](https://github.com/michael-gif/Flowchart-Maker/blob/main/resources/change_link.png)
+
+## Saving/Opening
+- Ctrl-S to save, or use the `Save flowchart` button on the toolbar
+- Ctrl-O to open, or use the `Open flowchart` button on the toolbar
