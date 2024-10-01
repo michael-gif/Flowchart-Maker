@@ -12,10 +12,10 @@ Simple gui based flowchart maker
 - Press Delete on your keyboard
 
 ## Editing a node
-- Double click on a node to open the edit node window
+- Double click on a node to open the edit node window  
 ![edit node window](https://github.com/michael-gif/Flowchart-Maker/blob/main/resources/edit_node_window.png)
 - You can set the node text, text color and background color
-- Clicking the expand icon on the right of the textbox will open the expanded text window
+- Clicking the expand icon on the right of the textbox will open the expanded text window  
 ![edit node window](https://github.com/michael-gif/Flowchart-Maker/blob/main/resources/expanded_text_window.png)
 
 ## Linking nodes
