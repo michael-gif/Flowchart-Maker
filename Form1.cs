@@ -301,8 +301,8 @@ namespace FlowchartMaker
             public string Category { get; set; } = "";
             public string Text { get; set; }
             public Northwoods.Go.Point Position { get; set; }
-            public string ForeColor { get; set; } = "black";
-            public string BackColor { get; set; } = "white";
+            public string ForeColor { get; set; } = "#000000";
+            public string BackColor { get; set; } = "#ffffff";
         }
         public class LinkData
         {

@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditNodeForm));
             label1 = new Label();
-            editNodeNewText = new TextBox();
             editNodeSaveButton = new Button();
             label2 = new Label();
             label3 = new Label();
             colorDialog1 = new ColorDialog();
-            editNodeForColorButton = new Button();
+            editNodeForeColorButton = new Button();
             editNodeBackColorButton = new Button();
+            editNodeNewText = new TextBox();
             SuspendLayout();
             // 
             // label1
@@ -47,13 +47,6 @@
             label1.Size = new Size(60, 15);
             label1.TabIndex = 0;
             label1.Text = "Node Text";
-            // 
-            // editNodeNewText
-            // 
-            editNodeNewText.Location = new Point(78, 12);
-            editNodeNewText.Name = "editNodeNewText";
-            editNodeNewText.Size = new Size(100, 23);
-            editNodeNewText.TabIndex = 1;
             // 
             // editNodeSaveButton
             // 
@@ -83,15 +76,14 @@
             label3.TabIndex = 4;
             label3.Text = "Back Color";
             // 
-            // editNodeForColorButton
+            // editNodeForeColorButton
             // 
-            editNodeForColorButton.Location = new Point(103, 41);
-            editNodeForColorButton.Name = "editNodeForColorButton";
-            editNodeForColorButton.Size = new Size(75, 23);
-            editNodeForColorButton.TabIndex = 5;
-            editNodeForColorButton.Text = "Change";
-            editNodeForColorButton.UseVisualStyleBackColor = true;
-            editNodeForColorButton.Click += editNodeForeColorButton_Click;
+            editNodeForeColorButton.Location = new Point(103, 41);
+            editNodeForeColorButton.Name = "editNodeForeColorButton";
+            editNodeForeColorButton.Size = new Size(75, 23);
+            editNodeForeColorButton.TabIndex = 5;
+            editNodeForeColorButton.UseVisualStyleBackColor = true;
+            editNodeForeColorButton.Click += editNodeForeColorButton_Click;
             // 
             // editNodeBackColorButton
             // 
@@ -99,9 +91,16 @@
             editNodeBackColorButton.Name = "editNodeBackColorButton";
             editNodeBackColorButton.Size = new Size(75, 23);
             editNodeBackColorButton.TabIndex = 6;
-            editNodeBackColorButton.Text = "Change";
             editNodeBackColorButton.UseVisualStyleBackColor = true;
             editNodeBackColorButton.Click += editNodeBackColorButton_Click;
+            // 
+            // editNodeNewText
+            // 
+            editNodeNewText.Location = new Point(78, 12);
+            editNodeNewText.Multiline = true;
+            editNodeNewText.Name = "editNodeNewText";
+            editNodeNewText.Size = new Size(100, 23);
+            editNodeNewText.TabIndex = 1;
             // 
             // EditNodeForm
             // 
@@ -110,7 +109,7 @@
             BackColor = Color.White;
             ClientSize = new Size(189, 133);
             Controls.Add(editNodeBackColorButton);
-            Controls.Add(editNodeForColorButton);
+            Controls.Add(editNodeForeColorButton);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(editNodeSaveButton);
@@ -130,12 +129,12 @@
         #endregion
 
         private Label label1;
-        private TextBox editNodeNewText;
         private Button editNodeSaveButton;
         private Label label2;
         private Label label3;
         private ColorDialog colorDialog1;
-        private Button editNodeForColorButton;
+        private Button editNodeForeColorButton;
         private Button editNodeBackColorButton;
+        private TextBox editNodeNewText;
     }
 }

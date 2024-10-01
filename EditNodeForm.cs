@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using Northwoods.Go.Models;
 using Northwoods.Go;
 using Northwoods.Go.Tools;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using SkiaSharp.Views.Desktop;
 
 namespace FlowchartMaker
@@ -31,6 +30,18 @@ namespace FlowchartMaker
             INSTANCE.editNodeNewText.SelectionStart = 0;
             INSTANCE.editNodeNewText.SelectionLength = INSTANCE.editNodeNewText.Text.Length;
             INSTANCE.editNodeNewText.Focus();
+
+            string hexColor = data.ForeColor;
+            int red = Convert.ToInt32(hexColor.Substring(1, 2), 16);
+            int green = Convert.ToInt32(hexColor.Substring(3, 2), 16);
+            int blue = Convert.ToInt32(hexColor.Substring(5, 2), 16);
+            INSTANCE.editNodeForeColorButton.BackColor = Color.FromArgb(255, red, green, blue);
+
+            hexColor = data.BackColor;
+            red = Convert.ToInt32(hexColor.Substring(1, 2), 16);
+            green = Convert.ToInt32(hexColor.Substring(3, 2), 16);
+            blue = Convert.ToInt32(hexColor.Substring(5, 2), 16);
+            INSTANCE.editNodeBackColorButton.BackColor = Color.FromArgb(255, red, green, blue);
         }
         private EditNodeForm()
         {
@@ -66,22 +77,24 @@ namespace FlowchartMaker
         {
             if (colorDialog1.ShowDialog() != DialogResult.OK) return;
             Node node = diagram.FindNodeForKey(NodeKey);
+            string rgbColor = "#" + colorDialog1.Color.ToSKColor().ToString().Substring(3);
             diagram.Model.Commit((m) =>
             {
-                string rgbColor = "#" + colorDialog1.Color.ToSKColor().ToString().Substring(3);
                 m.Set(node.Data, "ForeColor", rgbColor);
             });
+            editNodeForeColorButton.BackColor = colorDialog1.Color;
         }
 
         private void editNodeBackColorButton_Click(object sender, EventArgs e)
         {
             if (colorDialog1.ShowDialog() != DialogResult.OK) return;
             Node node = diagram.FindNodeForKey(NodeKey);
+            string rgbColor = "#" + colorDialog1.Color.ToSKColor().ToString().Substring(3);
             diagram.Model.Commit((m) =>
             {
-                string rgbColor = "#" + colorDialog1.Color.ToSKColor().ToString().Substring(3);
                 m.Set(node.Data, "BackColor", rgbColor);
             });
+            editNodeForeColorButton.BackColor = colorDialog1.Color;
         }
 
         private void EditNodeForm_FormClosing(object sender, FormClosingEventArgs e)
