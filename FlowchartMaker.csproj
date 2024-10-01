@@ -24,6 +24,21 @@
     <PackageReference Include="Northwoods.GoDiagram.WinForms" Version="10.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="if $(ConfigurationName) == Release (&#xD;&#xA;del bin\Release\net6.0-windows\FlowchartMaker.pdb&#xD;&#xA;del bin\Release\net6.0-windows\Northwoods.GoDiagram.WinForms.ForceDirectedLayout.dll&#xD;&#xA;del bin\Release\net6.0-windows\Northwoods.GoDiagram.WinForms.LayeredDigraphLayout.dll&#xD;&#xA;del bin\Release\net6.0-windows\Northwoods.GoDiagram.WinForms.TreeLayout.dll&#xD;&#xA;del bin\Release\net6.0-windows\OpenTK.GLControl.dll&#xD;&#xA;del bin\Release\net6.0-windows\SkiaSharp.Extended.Svg.dll&#xD;&#xA;resources\winrar a -ep1 -r &quot;bin\Release\net6.0-windows\FlowchartMaker.zip&quot; &quot;bin\Release\net6.0-windows\&quot;&#xD;&#xA;)" />
   </Target>

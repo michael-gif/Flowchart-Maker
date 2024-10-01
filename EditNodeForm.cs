@@ -48,6 +48,7 @@ namespace FlowchartMaker
         {
             InitializeComponent();
             editNodeNewText.KeyPress += new KeyPressEventHandler(CheckEnterKeyPress);
+            toolTip1.SetToolTip(expandEditTextButton, "Expand text");
         }
 
         private void CheckEnterKeyPress(object sender, KeyPressEventArgs e)
@@ -55,7 +56,6 @@ namespace FlowchartMaker
             if (e.KeyChar == (char)Keys.Return)
             {
                 SaveNodeText();
-                Hide();
             }
         }
 
@@ -105,6 +105,15 @@ namespace FlowchartMaker
                 e.Cancel = true;
                 Hide();
             }
+        }
+
+        private void expandEditTextButton_Click(object sender, EventArgs e)
+        {
+            Enabled = false;
+            ExpandedTextForm expandedTextForm = new ExpandedTextForm(diagram, NodeKey, editNodeNewText);
+            expandedTextForm.StartPosition = FormStartPosition.Manual;
+            expandedTextForm.Location = new System.Drawing.Point(Location.X + 8, Location.Y);
+            expandedTextForm.ShowDialog();
         }
     }
 }

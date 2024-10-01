@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditNodeForm));
             label1 = new Label();
             editNodeSaveButton = new Button();
@@ -37,6 +38,8 @@
             editNodeForeColorButton = new Button();
             editNodeBackColorButton = new Button();
             editNodeNewText = new TextBox();
+            expandEditTextButton = new Button();
+            toolTip1 = new ToolTip(components);
             SuspendLayout();
             // 
             // label1
@@ -52,7 +55,7 @@
             // 
             editNodeSaveButton.Location = new Point(12, 99);
             editNodeSaveButton.Name = "editNodeSaveButton";
-            editNodeSaveButton.Size = new Size(166, 23);
+            editNodeSaveButton.Size = new Size(191, 23);
             editNodeSaveButton.TabIndex = 2;
             editNodeSaveButton.Text = "Save";
             editNodeSaveButton.UseVisualStyleBackColor = true;
@@ -80,7 +83,7 @@
             // 
             editNodeForeColorButton.Location = new Point(103, 41);
             editNodeForeColorButton.Name = "editNodeForeColorButton";
-            editNodeForeColorButton.Size = new Size(75, 23);
+            editNodeForeColorButton.Size = new Size(100, 23);
             editNodeForeColorButton.TabIndex = 5;
             editNodeForeColorButton.UseVisualStyleBackColor = true;
             editNodeForeColorButton.Click += editNodeForeColorButton_Click;
@@ -89,7 +92,7 @@
             // 
             editNodeBackColorButton.Location = new Point(103, 70);
             editNodeBackColorButton.Name = "editNodeBackColorButton";
-            editNodeBackColorButton.Size = new Size(75, 23);
+            editNodeBackColorButton.Size = new Size(100, 23);
             editNodeBackColorButton.TabIndex = 6;
             editNodeBackColorButton.UseVisualStyleBackColor = true;
             editNodeBackColorButton.Click += editNodeBackColorButton_Click;
@@ -102,12 +105,25 @@
             editNodeNewText.Size = new Size(100, 23);
             editNodeNewText.TabIndex = 1;
             // 
+            // expandEditTextButton
+            // 
+            expandEditTextButton.BackgroundImage = (Image)resources.GetObject("expandEditTextButton.BackgroundImage");
+            expandEditTextButton.BackgroundImageLayout = ImageLayout.Zoom;
+            expandEditTextButton.Image = (Image)resources.GetObject("expandEditTextButton.Image");
+            expandEditTextButton.Location = new Point(178, 11);
+            expandEditTextButton.Name = "expandEditTextButton";
+            expandEditTextButton.Size = new Size(25, 25);
+            expandEditTextButton.TabIndex = 7;
+            expandEditTextButton.UseVisualStyleBackColor = true;
+            expandEditTextButton.Click += expandEditTextButton_Click;
+            // 
             // EditNodeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(189, 133);
+            ClientSize = new Size(216, 137);
+            Controls.Add(expandEditTextButton);
             Controls.Add(editNodeBackColorButton);
             Controls.Add(editNodeForeColorButton);
             Controls.Add(label3);
@@ -136,5 +152,7 @@
         private Button editNodeForeColorButton;
         private Button editNodeBackColorButton;
         private TextBox editNodeNewText;
+        private Button expandEditTextButton;
+        private ToolTip toolTip1;
     }
 }
