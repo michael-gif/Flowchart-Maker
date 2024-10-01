@@ -1,6 +1,11 @@
 # Flowchart-Maker
 Simple gui based flowchart maker
 
+# Installation
+- Download latest release [here](https://github.com/michael-gif/Flowchart-Maker/releases/latest)
+- Extract zip file
+- Run `FlowchartMaker.exe`
+
 # Screenshot
 ![screenshot](https://github.com/michael-gif/Flowchart-Maker/blob/main/resources/screenshot.png)
 
